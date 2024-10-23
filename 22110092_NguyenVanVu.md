@@ -57,8 +57,36 @@ output screenshot (optional)
 **Question 1**: Use sqlmap to get information about all available databases
 **Answer 1**:
 
+Step 1: Install SQL map from this link : https://github.com/sqlmapproject/sqlmap.git
+
+Step 2: Install bWAPP by following the tutorial in this link: https://github.com/quang-ute/Security-labs/tree/main/Web-security/Vulnerable%20Web%20App
+
+Step 3: Login and choose the bug:
+
+![image](https://github.com/user-attachments/assets/e708c4d6-b51c-4125-8683-c5fa7692435c)
+
+Step 4: Select movie and copy the url ( note that: delete query action ) : http://localhost:8025/sqli_2.php?movie=1
+
+![image](https://github.com/user-attachments/assets/84ffb76e-4217-4558-9090-b022dcbdebbf)
+
+![image](https://github.com/user-attachments/assets/3b315eed-2f9b-42ab-a9b7-0f0f7011b964)
+
+
+Step 5: Open Developer Tool and get cookie value in tab Application
+
+![image](https://github.com/user-attachments/assets/190e9138-8366-40a9-b277-d06cf45cb92d)
+
+
+Step 6: cd to folder sqlmap and run the code : python sqlmap.py -u "http://localhost:8025/sqli_2.php?movie=1" --dbs --cookie="PHPSESSID=q9s62q6gaojhs1g2meag832sa3;security_level=0"
+
+
+Step 7: Always type y and the terminal show all the databases
+
+![image](https://github.com/user-attachments/assets/70c022fe-a3b0-4e75-8120-c3426bba3bfe)
+
+
 **Question 2**: Use sqlmap to get tables, users information
-**Answer 2**:
+**Answer 2**:	
 
 **Question 3**: Make use of John the Ripper to disclose the password of all database users from the above exploit
 **Answer 3**:
