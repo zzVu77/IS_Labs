@@ -143,3 +143,31 @@ Step 3: Run this code to see all records in table user : python sqlmap.py -u "ht
 
 **Question 3**: Make use of John the Ripper to disclose the password of all database users from the above exploit
 **Answer 3**:
+
+Step 1: Download john from this link : http://www.openwall.com/john/
+
+Step 2: Take note hash password of one of users in file .txt . I will take note hash password of user A.I.M. in file psw.txt
+
+![image](https://github.com/user-attachments/assets/02588425-132e-47a9-9a2e-e2f7c548ea63)
+
+Step 3: Save file psw.txt in run folder of john folder i just download
+
+Step 4: Open folder run in terminal and run : ./john --incremental psw.txt to decode hash password
+
+![image](https://github.com/user-attachments/assets/94e403e4-b5d4-450b-b4d4-433ee7b269d1)
+
+
+Step 5: Run ./john --show psw.txt to show the password after decoding 
+
+![image](https://github.com/user-attachments/assets/7191dc20-af7d-421a-99de-e544d25e8338)
+
+
+Step 6: Login successfull
+
+![image](https://github.com/user-attachments/assets/451f1c76-f041-4061-88cf-d24e21f3ed6a)
+
+![image](https://github.com/user-attachments/assets/2ca4bad0-fca6-4020-9f79-4ce3c601375b)
+
+
+
+
