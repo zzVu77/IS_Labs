@@ -120,7 +120,7 @@ openssl enc -aes-256-ofb -in plaintext.txt -out encrypted_ofb.bin -K $(cat key.b
  
  openssl dgst -sha256 -mac HMAC -macopt key:$(cat key.bin) -out mac_ofb.txt encrypted_ofb.bin
  
-## Step 5: Gửi file cho cho PC0
+## Step 5: Send file to PC0
 Determine address  of PC0 and PC2
 At container PC0, type ifconfig 
 
