@@ -7,6 +7,39 @@ Setup a set of vms/containers in a network configuration of 2 subnets (1,2) with
   
 **Answer 1**:
 
+# Step 1: Prepare virtual environment
+Command: ```docker pull ubuntu:latest  ``` 
+
+Create container PC0: ```docker run -it --name PC0 --hostname PC0 --privileged ubuntu```
+
+Create container PC1: ```docker run -it --name PC1 --hostname PC1 --privileged ubuntu```
+
+Create container PC2: ```docker run -it --name PC2 --hostname PC2 --privileged ubuntu```
+
+# Step 2: Tạo mạng cho subnet 1 và subnet 2
+
+Tạo subnet 1:  docker network create --driver bridge --subnet=192.168.1.0/24 subnet1
+
+Tạo subnet 2: docker network create --driver bridge --subnet=192.168.2.0/24 subnet2
+
+# Step 3: Tạo container router và connect nó với subnet 1 và subnet 2:
+Tạo container "router": docker run -it --name router --hostname router --privileged ubuntu
+Connect với subnet 1: docker network connect subnet1 router --ip 192.168.1.1
+Connect với subnet 2: docker network connect subnet2 router --ip 192.168.2.1
+Gõ lệnh docker inspect router để kiểm tra : 
+Khu vực khoanh đỏ là địa chỉ của router
+![image](https://github.com/user-attachments/assets/ce882acd-8bf6-4bea-95c5-843f8e15e183)
+
+Khu vực khoanh vàng là thông tin của 2 subnet 1 và 2 
+
+![image](https://github.com/user-attachments/assets/2ad56302-9f98-4225-8eb8-6f10818e2bec)
+
+=> Kết luận: Connect thành công
+
+# Cài các tools cần thiết cho các container:
+  ## PC0
+  apt update
+  apt install apache2 -y
 
 **Question 2**:
 - Enable packet forwarding on the router.
