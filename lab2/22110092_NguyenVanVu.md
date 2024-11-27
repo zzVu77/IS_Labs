@@ -152,7 +152,20 @@ Result
   with OFB: 
 
   openssl dgst -sha256 -mac HMAC -macopt key:$(cat key.bin) -verify mac_ofb.txt encrypted_ofb.bin
+
+ ### Decrypt
+  Decrypt the file encrypted in CTR mode
+
+  openssl enc -d -aes-256-ctr -in encrypted_ctr.bin -out decrypted_ctr.txt -K $(cat key.bin) -iv $(cat iv.bin)
+
+  Decrypt the file encrypted in OFB mode
   
+  openssl enc -d -aes-256-ofb -in encrypted_ofb.bin -out decrypted_ofb.txt -K $(cat key.bin) -iv $(cat iv.bin)
+
+ ### Compare :
+  diff decrypted_ctr.txt plaintext.txt
+  diff decrypted_ofb.txt plaintext.txt
+
 ### 
 
 **Question 2**:
