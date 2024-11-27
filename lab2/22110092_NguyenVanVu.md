@@ -66,6 +66,38 @@ Encrypt the file with aes-cipher in CTR and OFB modes. How do you evaluate both 
 **Answer 1**:
 - Demonstrate your ability to send file to PC0 to with message authentication measure.
 - Verify the received file for each cipher modes
+
+# Solution: 
+ ## Step 1: Install needed packages for both container PC0 and PC2
+```
+apt update
+apt install net-tools
+apt install openssl
+apt install netcat-traditional
+```
+apt install net-tools: In order to use ifconfig to check IP adress.
+
+apt install openssl: Use openssl to achieve secure goal.
+
+apt install netcat-traditional: Use netcat to send - receive files.
+
+## Step 2: Create a text file at least 56 bytes on PC2
+```echo "This is a test file for encryption. It contains more than 56 bytes." > plaintext.txt ```
+![image](https://github.com/user-attachments/assets/b1566ff5-b4c0-4466-9ba0-23ecfb596c06)
+
+Check the size of file
+
+```
+wc -c plaintext.txt
+```
+
+![image](https://github.com/user-attachments/assets/8c36619b-195e-473d-961a-361ad4f0f5b6)
+
+The size of file is greater than 56 bytes
+
+## Step 3
+
+
 **Question 2**:
 - Assume the 6th bit in the ciphered file is corrupted.
 - Verify the received files for each cipher mode on PC0
