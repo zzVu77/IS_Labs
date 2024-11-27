@@ -96,7 +96,7 @@ wc -c plaintext.txt
 
 The size of file is greater than 56 bytes
 
-## Step 3: Mã hóa tệp bằng AES-256
+## Step 3:Encypt files by AES-256
 Tạo khóa (256-bit = 32 bytes)
 openssl rand -hex 32 > key.bin
 Tạo một IV (Initialization Vector) 16 bytes:
