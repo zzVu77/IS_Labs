@@ -16,7 +16,7 @@ Create container PC1: ```docker run -it --name PC1 --hostname PC1 --privileged u
 
 Create container PC2: ```docker run -it --name PC2 --hostname PC2 --privileged ubuntu```
 
-# Step 2: Tạo mạng cho subnet 1 và subnet 2
+# Step 2: Create  subnet 1 and  subnet 2
 
 Create subnet 1:  docker network create --driver bridge --subnet=192.168.1.0/24 subnet1
 
