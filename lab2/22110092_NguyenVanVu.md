@@ -61,8 +61,10 @@ Khu vực khoanh vàng là thông tin của 2 subnet 1 và 2
 # Task 2: Encrypting large message 
 Use PC0 and PC2 for this lab 
 Create a text file at least 56 bytes on PC2 this file will be sent encrypted to PC0
+
 **Question 1**:
 Encrypt the file with aes-cipher in CTR and OFB modes. How do you evaluate both cipher in terms of error propagation and adjacent plaintext blocks are concerned. 
+
 **Answer 1**:
 - Demonstrate your ability to send file to PC0 to with message authentication measure.
 - Verify the received file for each cipher modes
@@ -95,7 +97,51 @@ wc -c plaintext.txt
 
 The size of file is greater than 56 bytes
 
-## Step 3
+## Step 3: Mã hóa tệp bằng AES-256
+Tạo khóa (256-bit = 32 bytes)
+openssl rand -hex 32 > key.bin
+Tạo một IV (Initialization Vector) 16 bytes:
+openssl rand -hex 16 > iv.bin
+
+Mã hóa tệp trong chế độ CTR
+
+openssl enc -aes-256-ctr -in plaintext.txt -out encrypted_ctr.bin -K $(cat key.bin) -iv $(cat iv.bin)
+
+Mã hóa tệp trong chế độ OFB
+
+openssl enc -aes-256-ofb -in plaintext.txt -out encrypted_ofb.bin -K $(cat key.bin) -iv $(cat iv.bin)
+
+
+## Step 4: Thêm Message Authentication Code (MAC)
+ Tạo MAC cho file mã hóa bằng CTR
+ 
+ openssl dgst -sha256 -mac HMAC -macopt key:$(cat key.bin) -out mac_ctr.txt encrypted_ctr.bin
+
+ Tạo MAC cho file mã hóa bằng OFB
+ 
+ openssl dgst -sha256 -mac HMAC -macopt key:$(cat key.bin) -out mac_ofb.txt encrypted_ofb.bin
+ 
+## Step 5: Gửi file cho cho PC0
+Xác định địa chỉ của PC0 và PC2
+Ở container PC0, gõ ifconfig 
+
+![image](https://github.com/user-attachments/assets/f90c44bd-4441-4182-b0f4-4ac6674f14c7)
+
+Tương tự,  với PC2
+
+![image](https://github.com/user-attachments/assets/2741dcc3-6124-4617-b81d-9d3d0dc3078a)
+
+Sử dụng lênh này để nhận file từ PC2
+nc -l -p 3333 | tar -xvf -
+
+Bên container PC2 gửi files qua PC0, với địa chỉ là 172.17.0.2
+
+tar -cvf - encrypted_ctr.bin mac_ctr.txt encrypted_ofb.bin mac_ofb.txt | nc 172.17.0.2 3333
+
+Kết quả: PC0 đã nhận được những files cần thiết : 
+ 
+![image](https://github.com/user-attachments/assets/df73742c-eb6f-4460-8b1f-a907534d58ad)
+
 
 
 **Question 2**:
